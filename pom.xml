@@ -88,6 +88,5 @@
             <artifactId>selenide</artifactId>
             <version>6.6.5</version>
         </dependency>
-
     </dependencies>
 </project>

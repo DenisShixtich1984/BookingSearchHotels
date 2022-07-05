@@ -23,7 +23,7 @@ public class SelenideConfiguration {
     }
     public static void setUpBasicConfigure() {
         PropertyReader reader = new PropertyReader();
-        Configuration.baseUrl = "urlBooking";
+        Configuration.baseUrl = reader.getProperty("urlBooking");
         Configuration.headless = false;
         Configuration.browserSize = "1000x1000";
         Configuration.timeout = 10000;
