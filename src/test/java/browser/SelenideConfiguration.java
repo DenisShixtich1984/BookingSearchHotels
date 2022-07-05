@@ -1,8 +1,6 @@
 package browser;
-
 import com.codeborne.selenide.Configuration;
 import utils.PropertyReader;
-
 import static com.codeborne.selenide.Browsers.*;
 
 public class SelenideConfiguration {
@@ -24,9 +22,9 @@ public class SelenideConfiguration {
     public static void setUpBasicConfigure() {
         PropertyReader reader = new PropertyReader();
         Configuration.baseUrl = reader.getProperty("urlBooking");
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.browserSize = "1000x1000";
         Configuration.timeout = 10000;
-        Configuration.screenshots = false;
+        Configuration.screenshots = true;
     }
 }

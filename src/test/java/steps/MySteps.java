@@ -4,51 +4,58 @@ import com.codeborne.selenide.Selenide;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pages.BookingPage;
-import pages.SecondPage;
 
-import java.util.Optional;
 import static com.codeborne.selenide.Selenide.open;
 
 public class MySteps {
 
     private BookingPage bookingPage;
-    private SecondPage secondPage;
-    private String searchItem;
-
     @Before
-    public void setUp() {
-        bookingPage = new BookingPage();
-        String browser = Optional.ofNullable(System.getProperty("browser")).orElse("chrome");
-        SelenideConfiguration.configureBrowser(browser);
-    }
+    public void start() {
+        SelenideConfiguration.configureBrowser("");
+        open("");
 
-    @Given("User on the found page")
-    public void UserOnTheFoundPage() {
-        open("Start");
     }
 
     @When("User search {string}")
-    public void userSearch(String keyword) {
-        searchItem = keyword;
-        secondPage = new SecondPage();
-        bookingPage.searchByKeyword(searchItem);
+    public void userSearch(String arg0) {
+
+        bookingPage = new BookingPage();
+        bookingPage.searchByKeyword(arg0);
     }
+
     @And("{string} on the search page")
-    public void onTheSearchPage(String result) {
-        Assert.assertEquals("One Hundred Shoreditch", result);
+    public void onTheSearchPage(String arg0) {
+        Assert.assertEquals("One Hundred Shoreditch", arg0);
     }
+
     @Then("Rating of the Hotel is {string}")
-    public void RatingOfTheHotel (String scored) {
-        Assert.assertEquals("8.6", scored);
+    public void ratingOfTheHotelIs(String arg0) {
+        Assert.assertEquals("8.6", arg0);
     }
 
     @After
-    public void tearDown() {
+    public void finish() {
         Selenide.closeWebDriver();
+}
+
+    @When("We search {string}")
+    public void weSearch(String arg0) {
+        bookingPage = new BookingPage();
+        bookingPage.searchByKeyword(arg0);
+    }
+
+    @And("{string} on the page")
+    public void onThePage(String arg0) {
+        Assert.assertEquals("The Jade", arg0);
+    }
+
+    @Then("Hotel rating is {string}")
+    public void hotelRatingIs(String arg0) {
+        Assert.assertEquals("7.9", arg0);
     }
 }
